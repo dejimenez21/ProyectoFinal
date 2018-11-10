@@ -17,7 +17,7 @@ namespace ProyectoF
         private string Calidad;
         private string Formato;
 
-        public Cancion(int a, string b, string c, string d, string e, double f, string g, string h)
+        public Cancion(int a, string b, string c, string d, string e, double f)
         {
             ID = a;
             Nombre = b;
