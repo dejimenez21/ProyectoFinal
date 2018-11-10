@@ -24,7 +24,7 @@ namespace ProyectoF
             Artista = c;
             Album = d;
             Genero = e;
-
+            Duracion = f;
         }
     }
 }
