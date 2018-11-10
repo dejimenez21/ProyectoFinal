@@ -10,41 +10,52 @@ namespace ProyectoF
     {
         static void Main(string[] args)
         {
-            int dec;
-
-            Console.WriteLine("1- Agregar cancion");
-            Console.WriteLine("2- Listar todas las canciones");
-            Console.WriteLine("3- Editar cancion");
-            Console.WriteLine("4- Borrar cancion");
-            Console.WriteLine("5- Buscar");
-
-            dec = int.Parse(Console.ReadLine());
-
-            switch (dec)
+            bool salir = false;
+            while (true)
             {
-                case 1:
+                int dec;
 
-                    break;
+                Console.WriteLine("1- Agregar cancion");
+                Console.WriteLine("2- Listar todas las canciones");
+                Console.WriteLine("3- Editar cancion");
+                Console.WriteLine("4- Borrar cancion");
+                Console.WriteLine("5- Buscar");
+                Console.WriteLine("6- Salir");
+                dec = int.Parse(Console.ReadLine());
 
-                case 2:
+                switch (dec)
+                {
+                    case 1:
 
-                    break;
+                        break;
 
-                case 3:
+                    case 2:
 
-                    break;
+                        break;
 
-                case 4:
+                    case 3:
 
-                    break;
+                        break;
 
-                case 5:
+                    case 4:
 
-                    Buscar();
+                        break;
 
-                    break;
+                    case 5:
+                        Buscar();
+                        break;
+
+                    case 6:
+                        salir = true;
+                        break;
+
+                    default:
+                        Console.WriteLine("inserte una opcion valida");
+                        break;
+                }
+                if (salir) break;
             }
-
+            Console.WriteLine("Pulse cualquier tecla para salir (incluso la de apagado :v)");
             Console.ReadKey();
         }
 

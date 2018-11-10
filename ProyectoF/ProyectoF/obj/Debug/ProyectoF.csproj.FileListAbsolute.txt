@@ -1,0 +1,7 @@
+C:\Users\Kamehametroll\Desktop\Tarea\Programación 2\ProyectoFinal-master\ProyectoF\ProyectoF\bin\Debug\ProyectoF.exe.config
+C:\Users\Kamehametroll\Desktop\Tarea\Programación 2\ProyectoFinal-master\ProyectoF\ProyectoF\bin\Debug\ProyectoF.exe
+C:\Users\Kamehametroll\Desktop\Tarea\Programación 2\ProyectoFinal-master\ProyectoF\ProyectoF\bin\Debug\ProyectoF.pdb
+C:\Users\Kamehametroll\Desktop\Tarea\Programación 2\ProyectoFinal-master\ProyectoF\ProyectoF\obj\Debug\ProyectoF.csprojAssemblyReference.cache
+C:\Users\Kamehametroll\Desktop\Tarea\Programación 2\ProyectoFinal-master\ProyectoF\ProyectoF\obj\Debug\ProyectoF.csproj.CoreCompileInputs.cache
+C:\Users\Kamehametroll\Desktop\Tarea\Programación 2\ProyectoFinal-master\ProyectoF\ProyectoF\obj\Debug\ProyectoF.exe
+C:\Users\Kamehametroll\Desktop\Tarea\Programación 2\ProyectoFinal-master\ProyectoF\ProyectoF\obj\Debug\ProyectoF.pdb
