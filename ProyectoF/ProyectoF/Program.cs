@@ -13,6 +13,7 @@ namespace ProyectoF
         {
             Random rad = new Random(); //Objeto random
             IList<Cancion> Canciones = new List<Cancion>(); // Aqui se almacenan las canciones
+            List<string> canciones = new List<string>(); //Lista creada para prueba
             int IdCanciones = rad.Next(100000, 999999); //De aqui saldra el ID de las canciones, cada vez que añadamos una cancion le sumaremos +1 a este contador. Modificacion: Al inicial el programa, se crea un numero aleatorio entre el 100000 y el 999999 y a partir de ese numero se le van asignando los ID a las cnaciones.
             bool salir = false;
             string nombre, artista, album, genero;
@@ -34,19 +35,24 @@ namespace ProyectoF
                     case 1:
                         Console.WriteLine("Introduzca el nombre");
                         nombre = Convert.ToString(Console.ReadLine());
+                        canciones.Add(nombre + "      "); //Se añade el nombre a la lista de prueba
                         Console.WriteLine(" ");
                         Console.WriteLine("Introduzca el artista");
                         artista = Convert.ToString(Console.ReadLine());
+                        canciones.Add("              " + artista + "      ");  //Se añade el artista a la lista de prueba
                         Console.WriteLine(" ");
-                        Console.WriteLine("Introduzca el album");
+                        Console.WriteLine("Introduzca el album");  //Se añade el album a la lista de prueba
                         album = Convert.ToString(Console.ReadLine());
+                        canciones.Add("         " + album + "       " );
                         Console.WriteLine(" ");
-                        Console.WriteLine("Introduzca el genero");
+                        Console.WriteLine("Introduzca el genero");  //Se añade el genero a la lista de prueba
                         genero = Convert.ToString(Console.ReadLine());
+                        canciones.Add("          " + genero + "      ");
                         Console.WriteLine(" ");
-                        Console.WriteLine("Introduzca la duracion");
+                        Console.WriteLine("Introduzca la duracion");  //Se añade la duracion a la lista de prueba
                         duracion = Convert.ToDouble(Console.ReadLine());
-                        Console.WriteLine(" ");
+                        canciones.Add(Convert.ToString("              " + duracion) + "\n");
+                        Console.WriteLine(" "); 
                         Canciones.Add(new Cancion(IdCanciones, nombre, artista, album, genero, duracion));
                         IdCanciones++;
                         Console.WriteLine("Cancion agregada exitosamente");
@@ -54,6 +60,10 @@ namespace ProyectoF
                         break;
 
                     case 2:
+                        Console.WriteLine("[Nombre]         -       [Artista]       -       [Album]      -      [Genero]         -      [Duracion]"); // Este cw sive para tener una idea mas clara a la hora e ver las cancoiones en la lista de pruebas
+                        foreach (object i in canciones) {
+                            Console.Write(i);
+                        }
                         break;
 
                     case 3:
