@@ -26,5 +26,5 @@ namespace ProyectoF
             Genero = e;
             Duracion = f;
         }
-    }
+    }   
 }

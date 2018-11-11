@@ -5,3 +5,10 @@ C:\Users\Kamehametroll\Desktop\Tarea\Programación 2\ProyectoFinal-master\Proyec
 C:\Users\Kamehametroll\Desktop\Tarea\Programación 2\ProyectoFinal-master\ProyectoF\ProyectoF\obj\Debug\ProyectoF.csproj.CoreCompileInputs.cache
 C:\Users\Kamehametroll\Desktop\Tarea\Programación 2\ProyectoFinal-master\ProyectoF\ProyectoF\obj\Debug\ProyectoF.exe
 C:\Users\Kamehametroll\Desktop\Tarea\Programación 2\ProyectoFinal-master\ProyectoF\ProyectoF\obj\Debug\ProyectoF.pdb
+C:\Users\Elvis G Batista\Documents\GitHub\ProyectoFinal\ProyectoF\ProyectoF\bin\Debug\ProyectoF.exe.config
+C:\Users\Elvis G Batista\Documents\GitHub\ProyectoFinal\ProyectoF\ProyectoF\bin\Debug\ProyectoF.exe
+C:\Users\Elvis G Batista\Documents\GitHub\ProyectoFinal\ProyectoF\ProyectoF\bin\Debug\ProyectoF.pdb
+C:\Users\Elvis G Batista\Documents\GitHub\ProyectoFinal\ProyectoF\ProyectoF\obj\Debug\ProyectoF.csprojAssemblyReference.cache
+C:\Users\Elvis G Batista\Documents\GitHub\ProyectoFinal\ProyectoF\ProyectoF\obj\Debug\ProyectoF.csproj.CoreCompileInputs.cache
+C:\Users\Elvis G Batista\Documents\GitHub\ProyectoFinal\ProyectoF\ProyectoF\obj\Debug\ProyectoF.exe
+C:\Users\Elvis G Batista\Documents\GitHub\ProyectoFinal\ProyectoF\ProyectoF\obj\Debug\ProyectoF.pdb
