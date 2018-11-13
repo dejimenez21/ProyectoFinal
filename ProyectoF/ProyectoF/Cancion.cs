@@ -17,7 +17,7 @@ namespace ProyectoF
         public string Calidad;
         public string Formato;
 
-        public Cancion(int a, string b, string c, string d, string e, double f)
+        public Cancion(int a, string b, string c, string d, string e, double f, string g, string h)
         {
             ID = a;
             Nombre = b;
@@ -25,6 +25,8 @@ namespace ProyectoF
             Album = d;
             Genero = e;
             Duracion = f;
+            Calidad = g;
+            Formato = h;
         }
     }   
 }

@@ -13,16 +13,16 @@ namespace ProyectoF
         {
             
             IList<Cancion> Canciones = new List<Cancion>(); // Aqui se almacenan las canciones
-            //List<string> canciones = new List<string>(); //Lista creada para prueba
+            
             int IdCanciones = 1; //De aqui saldra el ID de las canciones, cada vez que añadamos una cancion le sumaremos +1 a este contador. Modificacion: Al iniciar programa es 1.
             bool salir = false;
-            string nombre, artista, album, genero;
+            string nombre, artista, album, genero, calidad, formato;
             double duracion;
             while (true)
             {
                 Console.Clear();
 
-                int dec;
+                int dec=0;
                 Console.WriteLine("1- Agregar cancion");
                 Console.WriteLine("2- Listar todas las canciones");
                 Console.WriteLine("3- Editar cancion");
@@ -30,7 +30,17 @@ namespace ProyectoF
                 Console.WriteLine("5- Buscar");
                 Console.WriteLine("6- Salir");
                 Console.WriteLine(" ");
-                dec = int.Parse(Console.ReadLine());
+
+                try  //Evita que se inserten cualquier tipo de valor diferente a un numero.
+                {
+                    dec = int.Parse(Console.ReadLine());
+                }
+                catch 
+                {
+                    
+                }
+
+                Console.Clear();
 
                 switch (dec)
                 {
@@ -57,7 +67,17 @@ namespace ProyectoF
                        
                         Console.WriteLine(" ");
 
-                        Canciones.Add(new Cancion(IdCanciones, nombre, artista, album, genero, duracion)); //Se crea un objeto Cancion con sus respectivos parametros
+                        Console.WriteLine("Introduzca la calidad");  //Se añade la duracion a la lista de prueba
+                        calidad = Console.ReadLine();
+
+                        Console.WriteLine(" ");
+
+                        Console.WriteLine("Introduzca el formato");  //Se añade la duracion a la lista de prueba
+                        formato = Console.ReadLine();
+
+                        Console.WriteLine(" ");
+
+                        Canciones.Add(new Cancion(IdCanciones, nombre, artista, album, genero, duracion, calidad, formato)); //Se crea un objeto Cancion con sus respectivos parametros
 
                         IdCanciones++;
 
@@ -69,7 +89,7 @@ namespace ProyectoF
 
                     case 2:
 
-                        Console.Clear();
+                        
                         foreach (Cancion k in Canciones) //Se imprimen las canciones
                         {
                             Console.WriteLine("ID: " + k.ID);
@@ -86,7 +106,7 @@ namespace ProyectoF
                         break;
 
                     case 3:
-                        int id, dec1;
+                        int id, dec1=0;
 
                         Console.WriteLine("Ingrese el ID de la cancion a editar:");
                         id = int.Parse(Console.ReadLine());
@@ -101,7 +121,10 @@ namespace ProyectoF
                         Console.WriteLine("\t6- Calidad");
                         Console.WriteLine("\t7- Formato");
 
+                        
                         dec1 = int.Parse(Console.ReadLine());
+                        
+                       
 
                         switch (dec1)
                         {
@@ -210,11 +233,26 @@ namespace ProyectoF
                         break;
 
                     case 4:
+                        
+                        int vElim;
+                        Console.WriteLine("Ingrese el ID de la cancion a elminar");
+                        vElim = int.Parse(Console.ReadLine());
 
+                        for(int i=0; i<Canciones.Count; i++)
+                        {
+                            if (Canciones[i].ID == vElim)
+                            {
+                                Canciones.RemoveAt(i);
+                                i--;
+                            }
+                        }
+                        
+                        Console.WriteLine("Cancion eliminada exitosamente");
+                        Console.ReadKey();
                         break;
 
                     case 5:
-                        Console.Clear();
+                        
                         Console.WriteLine("Buscar:\n");
                         Console.WriteLine("\t1- Por Artista");
                         Console.WriteLine("\t2- Por Genero");
@@ -278,24 +316,7 @@ namespace ProyectoF
                                     }
                                 }
                                 break;
-                            case 4:
-                                Console.WriteLine("Ingrese el ID de la cancion");
-                                int vID = Int32.Parse(Console.ReadLine());
-                                foreach (Cancion k in Canciones) //Se imprimen las canciones
-                                {
-                                    if (k.ID == vID)
-                                    {
-                                        Console.WriteLine("ID: " + k.ID);
-                                        Console.WriteLine("Nombre: " + k.Nombre);
-                                        Console.WriteLine("Artistsa: " + k.Artista);
-                                        Console.WriteLine("Album: " + k.Album);
-                                        Console.WriteLine("Genero: " + k.Genero);
-                                        Console.WriteLine("Duracion: " + k.Duracion);
-                                        Console.WriteLine("Calidad: " + k.Calidad);
-                                        Console.WriteLine("Formato: " + k.Formato + "\n");
-                                    }
-                                }
-                                break;
+                            
                         }
 
                         Console.ReadLine();
@@ -307,6 +328,7 @@ namespace ProyectoF
 
                     default:
                         Console.WriteLine("inserte una opcion valida");
+                        Console.ReadKey();
                         break;
                 }
                 if (salir) break;
@@ -315,31 +337,6 @@ namespace ProyectoF
             Console.ReadKey();
         }
 
-        static void EditarCancion()
-        {
-            int id, dec;
-
-            Console.WriteLine("Ingrese el ID de la cancion a editar:");
-            id = int.Parse(Console.ReadLine());
-
-            Console.Clear();
-            Console.WriteLine("Editar:");
-            Console.WriteLine("\t1- Nombre");
-            Console.WriteLine("\t2- Artista");
-            Console.WriteLine("\t3- Album");
-            Console.WriteLine("\t4- Genero");
-            Console.WriteLine("\t5- Duracion");
-            Console.WriteLine("\t6- Calidad");
-            Console.WriteLine("\t7- Formato");
-
-            dec = int.Parse(Console.ReadLine());
-
-            //switch (dec)
-            //{
-            //    case 1:
-
-            //        foreach(object j in canciones)
-            //}
-        }
+        
     }
 }
