@@ -103,7 +103,7 @@ namespace ProyectoF
 
                         dec1 = int.Parse(Console.ReadLine());
 
-                        switch (dec)
+                        switch (dec1)
                         {
                             case 1:
                                 string vNom;
@@ -118,6 +118,93 @@ namespace ProyectoF
                                     }
                                 }
                                 break;
+
+                            case 2:
+                                string vArtista; //Variable que tiene el nombre del nuevo artista que se modificara
+                                Console.WriteLine("Ingrese el nuevo artista");
+                                vArtista = Console.ReadLine();
+
+                                foreach (Cancion c in Canciones)
+                                {
+                                    if (c.ID == id) //Se busca la cancion cuyo ID sea ingresado.
+                                    {
+                                        c.Artista = vArtista;
+                                    }
+                                }
+                                break;
+
+                            case 3:
+                                string vAlbum; //Variable que tiene el nombre del nuevo artista que se modificara
+                                Console.WriteLine("Ingrese el nuevo nombre del album");
+                                vAlbum = Console.ReadLine();
+
+                                foreach (Cancion c in Canciones)
+                                {
+                                    if (c.ID == id) //Se busca la cancion cuyo ID sea ingresado.
+                                    {
+                                        c.Album = vAlbum;
+                                    }
+                                }
+                                break;
+
+                            case 4:
+                                string vGenero; //Variable que tiene el nombre del nuevo artista que se modificara
+                                Console.WriteLine("Ingrese el nuevo genero");
+                                vGenero = Console.ReadLine();
+
+                                foreach (Cancion c in Canciones)
+                                {
+                                    if (c.ID == id) //Se busca la cancion cuyo ID sea ingresado.
+                                    {
+                                        c.Genero = vGenero;
+                                    }
+                                }
+                                break;
+
+                            case 5:
+                                double vDuracion; //Variable que tiene el nombre del nuevo artista que se modificara
+                                Console.WriteLine("Ingrese la nueva duracion");
+                                vDuracion = Int32.Parse(Console.ReadLine());
+
+                                foreach (Cancion c in Canciones)
+                                {
+                                    if (c.ID == id) //Se busca la cancion cuyo ID sea ingresado.
+                                    {
+                                        c.Duracion = vDuracion;
+                                    }
+                                }
+                                break;
+                            case 6:
+                                string vCalidad; //Variable que tiene el nombre del nuevo artista que se modificara
+                                Console.WriteLine("Ingrese la nueva calidad");
+                                vCalidad = Console.ReadLine();
+
+                                foreach (Cancion c in Canciones)
+                                {
+                                    if (c.ID == id) //Se busca la cancion cuyo ID sea ingresado.
+                                    {
+                                        c.Calidad = vCalidad;
+                                    }
+                                }
+                                break;
+
+                            case 7:
+                                string vFormato; //Variable que tiene el nombre del nuevo artista que se modificara
+                                Console.WriteLine("Ingrese el nuevo formato");
+                                vFormato = Console.ReadLine();
+
+                                foreach (Cancion c in Canciones)
+                                {
+                                    if (c.ID == id) //Se busca la cancion cuyo ID sea ingresado.
+                                    {
+                                        c.Formato = vFormato;
+                                    }
+                                }
+                                break;
+
+                            default:
+                                Console.WriteLine("inserte una opcion valida");
+                                break;
                         }
 
                         break;
@@ -127,7 +214,91 @@ namespace ProyectoF
                         break;
 
                     case 5:
-                        Buscar();
+                        Console.Clear();
+                        Console.WriteLine("Buscar:\n");
+                        Console.WriteLine("\t1- Por Artista");
+                        Console.WriteLine("\t2- Por Genero");
+                        Console.WriteLine("\t3- Por Nombre");
+                        Console.WriteLine("\t4- Por ID");
+
+                        int des = Int32.Parse(Console.ReadLine());
+
+                        switch (des) {
+                            case 1:
+                                Console.WriteLine("Ingrese el nombre del artista");
+                                string vArtista = Console.ReadLine();
+                                foreach (Cancion k in Canciones) //Se imprimen las canciones
+                                {
+                                    if (k.Artista == vArtista) {
+                                        Console.WriteLine("ID: " + k.ID);
+                                        Console.WriteLine("Nombre: " + k.Nombre);
+                                        Console.WriteLine("Artistsa: " + k.Artista);
+                                        Console.WriteLine("Album: " + k.Album);
+                                        Console.WriteLine("Genero: " + k.Genero);
+                                        Console.WriteLine("Duracion: " + k.Duracion);
+                                        Console.WriteLine("Calidad: " + k.Calidad);
+                                        Console.WriteLine("Formato: " + k.Formato + "\n");
+                                    }
+                                }
+                                break;
+
+                            case 2:
+                                Console.WriteLine("Ingrese el genero de la cancion");
+                                string vGenero = Console.ReadLine();
+                                foreach (Cancion k in Canciones) //Se imprimen las canciones
+                                {
+                                    if (k.Genero == vGenero)
+                                    {
+                                        Console.WriteLine("ID: " + k.ID);
+                                        Console.WriteLine("Nombre: " + k.Nombre);
+                                        Console.WriteLine("Artistsa: " + k.Artista);
+                                        Console.WriteLine("Album: " + k.Album);
+                                        Console.WriteLine("Genero: " + k.Genero);
+                                        Console.WriteLine("Duracion: " + k.Duracion);
+                                        Console.WriteLine("Calidad: " + k.Calidad);
+                                        Console.WriteLine("Formato: " + k.Formato + "\n");
+                                    }
+                                }
+                                break;
+                            case 3:
+                                Console.WriteLine("Ingrese el nombre de la cancion");
+                                string vNombre = Console.ReadLine();
+                                foreach (Cancion k in Canciones) //Se imprimen las canciones
+                                {
+                                    if (k.Nombre == vNombre)
+                                    {
+                                        Console.WriteLine("ID: " + k.ID);
+                                        Console.WriteLine("Nombre: " + k.Nombre);
+                                        Console.WriteLine("Artistsa: " + k.Artista);
+                                        Console.WriteLine("Album: " + k.Album);
+                                        Console.WriteLine("Genero: " + k.Genero);
+                                        Console.WriteLine("Duracion: " + k.Duracion);
+                                        Console.WriteLine("Calidad: " + k.Calidad);
+                                        Console.WriteLine("Formato: " + k.Formato + "\n");
+                                    }
+                                }
+                                break;
+                            case 4:
+                                Console.WriteLine("Ingrese el ID de la cancion");
+                                int vID = Int32.Parse(Console.ReadLine());
+                                foreach (Cancion k in Canciones) //Se imprimen las canciones
+                                {
+                                    if (k.ID == vID)
+                                    {
+                                        Console.WriteLine("ID: " + k.ID);
+                                        Console.WriteLine("Nombre: " + k.Nombre);
+                                        Console.WriteLine("Artistsa: " + k.Artista);
+                                        Console.WriteLine("Album: " + k.Album);
+                                        Console.WriteLine("Genero: " + k.Genero);
+                                        Console.WriteLine("Duracion: " + k.Duracion);
+                                        Console.WriteLine("Calidad: " + k.Calidad);
+                                        Console.WriteLine("Formato: " + k.Formato + "\n");
+                                    }
+                                }
+                                break;
+                        }
+
+                        Console.ReadLine();
                         break;
 
                     case 6:
@@ -142,19 +313,6 @@ namespace ProyectoF
             }
             Console.WriteLine("Pulse cualquier tecla para salir (incluso la de apagado :v)");
             Console.ReadKey();
-        }
-
-        static void Buscar()
-        {
-            int db;
-
-            Console.Clear();
-            Console.WriteLine("Buscar:\n");
-            Console.WriteLine("\t1- Por Artista");
-            Console.WriteLine("\t2- Por Genero");
-            Console.WriteLine("\t3- Por Nombre");
-
-            db = int.Parse(Console.ReadLine());
         }
 
         static void EditarCancion()
