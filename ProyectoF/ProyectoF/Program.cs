@@ -11,15 +11,17 @@ namespace ProyectoF
     {
         static void Main(string[] args)
         {
-            Random rad = new Random(); //Objeto random
+            
             IList<Cancion> Canciones = new List<Cancion>(); // Aqui se almacenan las canciones
-            List<string> canciones = new List<string>(); //Lista creada para prueba
-            int IdCanciones = rad.Next(100000, 999999); //De aqui saldra el ID de las canciones, cada vez que añadamos una cancion le sumaremos +1 a este contador. Modificacion: Al inicial el programa, se crea un numero aleatorio entre el 100000 y el 999999 y a partir de ese numero se le van asignando los ID a las cnaciones.
+            //List<string> canciones = new List<string>(); //Lista creada para prueba
+            int IdCanciones = 1; //De aqui saldra el ID de las canciones, cada vez que añadamos una cancion le sumaremos +1 a este contador. Modificacion: Al iniciar programa es 1.
             bool salir = false;
             string nombre, artista, album, genero;
             double duracion;
             while (true)
             {
+                Console.Clear();
+
                 int dec;
                 Console.WriteLine("1- Agregar cancion");
                 Console.WriteLine("2- Listar todas las canciones");
@@ -35,38 +37,88 @@ namespace ProyectoF
                     case 1:
                         Console.WriteLine("Introduzca el nombre");
                         nombre = Convert.ToString(Console.ReadLine());
-                        canciones.Add(nombre + "      "); //Se añade el nombre a la lista de prueba
+                        
                         Console.WriteLine(" ");
                         Console.WriteLine("Introduzca el artista");
                         artista = Convert.ToString(Console.ReadLine());
-                        canciones.Add("              " + artista + "      ");  //Se añade el artista a la lista de prueba
+                        
                         Console.WriteLine(" ");
-                        Console.WriteLine("Introduzca el album");  //Se añade el album a la lista de prueba
+                        Console.WriteLine("Introduzca el album");  
+
                         album = Convert.ToString(Console.ReadLine());
-                        canciones.Add("         " + album + "       " );
+                        
                         Console.WriteLine(" ");
                         Console.WriteLine("Introduzca el genero");  //Se añade el genero a la lista de prueba
                         genero = Convert.ToString(Console.ReadLine());
-                        canciones.Add("          " + genero + "      ");
+                       
                         Console.WriteLine(" ");
                         Console.WriteLine("Introduzca la duracion");  //Se añade la duracion a la lista de prueba
                         duracion = Convert.ToDouble(Console.ReadLine());
-                        canciones.Add(Convert.ToString("              " + duracion) + "\n");
-                        Console.WriteLine(" "); 
-                        Canciones.Add(new Cancion(IdCanciones, nombre, artista, album, genero, duracion));
+                       
+                        Console.WriteLine(" ");
+
+                        Canciones.Add(new Cancion(IdCanciones, nombre, artista, album, genero, duracion)); //Se crea un objeto Cancion con sus respectivos parametros
+
                         IdCanciones++;
+
+                        Console.Clear();
                         Console.WriteLine("Cancion agregada exitosamente");
                         Console.WriteLine(" ");
+                        Console.ReadKey();
                         break;
 
                     case 2:
-                        Console.WriteLine("[Nombre]         -       [Artista]       -       [Album]      -      [Genero]         -      [Duracion]"); // Este cw sive para tener una idea mas clara a la hora e ver las cancoiones en la lista de pruebas
-                        foreach (object i in canciones) {
-                            Console.Write(i);
+
+                        Console.Clear();
+                        foreach (Cancion k in Canciones) //Se imprimen las canciones
+                        {
+                            Console.WriteLine("ID: " + k.ID);
+                            Console.WriteLine("Nombre: " + k.Nombre);
+                            Console.WriteLine("Artistsa: " + k.Artista);
+                            Console.WriteLine("Album: " + k.Album);
+                            Console.WriteLine("Genero: " + k.Genero);
+                            Console.WriteLine("Duracion: " + k.Duracion);
+                            Console.WriteLine("Calidad: " + k.Calidad);
+                            Console.WriteLine("Formato: " + k.Formato + "\n");
                         }
+
+                        Console.ReadKey();
                         break;
 
                     case 3:
+                        int id, dec1;
+
+                        Console.WriteLine("Ingrese el ID de la cancion a editar:");
+                        id = int.Parse(Console.ReadLine());
+
+                        Console.Clear();
+                        Console.WriteLine("Editar:");
+                        Console.WriteLine("\t1- Nombre");
+                        Console.WriteLine("\t2- Artista");
+                        Console.WriteLine("\t3- Album");
+                        Console.WriteLine("\t4- Genero");
+                        Console.WriteLine("\t5- Duracion");
+                        Console.WriteLine("\t6- Calidad");
+                        Console.WriteLine("\t7- Formato");
+
+                        dec1 = int.Parse(Console.ReadLine());
+
+                        switch (dec)
+                        {
+                            case 1:
+                                string vNom;
+                                Console.WriteLine("Ingrese el nombre nuevo");
+                                vNom = Console.ReadLine();
+
+                                foreach(Cancion c in Canciones)
+                                {
+                                    if (c.ID == id) //Se busca la cancion cuyo ID sea ingresado.
+                                    {
+                                        c.Nombre = vNom;
+                                    }
+                                }
+                                break;
+                        }
 
                         break;
 
@@ -105,9 +157,31 @@ namespace ProyectoF
             db = int.Parse(Console.ReadLine());
         }
 
-        static void AgregarCancion()
+        static void EditarCancion()
         {
+            int id, dec;
 
+            Console.WriteLine("Ingrese el ID de la cancion a editar:");
+            id = int.Parse(Console.ReadLine());
+
+            Console.Clear();
+            Console.WriteLine("Editar:");
+            Console.WriteLine("\t1- Nombre");
+            Console.WriteLine("\t2- Artista");
+            Console.WriteLine("\t3- Album");
+            Console.WriteLine("\t4- Genero");
+            Console.WriteLine("\t5- Duracion");
+            Console.WriteLine("\t6- Calidad");
+            Console.WriteLine("\t7- Formato");
+
+            dec = int.Parse(Console.ReadLine());
+
+            //switch (dec)
+            //{
+            //    case 1:
+
+            //        foreach(object j in canciones)
+            //}
         }
     }
 }

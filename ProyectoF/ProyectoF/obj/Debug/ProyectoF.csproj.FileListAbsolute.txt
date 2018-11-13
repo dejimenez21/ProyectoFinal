@@ -12,3 +12,10 @@ C:\Users\Elvis G Batista\Documents\GitHub\ProyectoFinal\ProyectoF\ProyectoF\obj\
 C:\Users\Elvis G Batista\Documents\GitHub\ProyectoFinal\ProyectoF\ProyectoF\obj\Debug\ProyectoF.csproj.CoreCompileInputs.cache
 C:\Users\Elvis G Batista\Documents\GitHub\ProyectoFinal\ProyectoF\ProyectoF\obj\Debug\ProyectoF.exe
 C:\Users\Elvis G Batista\Documents\GitHub\ProyectoFinal\ProyectoF\ProyectoF\obj\Debug\ProyectoF.pdb
+C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\bin\Debug\ProyectoF.exe.config
+C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\bin\Debug\ProyectoF.exe
+C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\bin\Debug\ProyectoF.pdb
+C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\obj\Debug\ProyectoF.csproj.CoreCompileInputs.cache
+C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\obj\Debug\ProyectoF.exe
+C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\obj\Debug\ProyectoF.pdb
+C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\obj\Debug\ProyectoF.csprojAssemblyReference.cache

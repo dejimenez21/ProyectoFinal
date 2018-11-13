@@ -8,14 +8,14 @@ namespace ProyectoF
 {
     class Cancion
     {
-        private int ID;
-        private string Nombre;
-        private string Artista;
-        private string Album;
-        private string Genero;
-        private double Duracion;
-        private string Calidad;
-        private string Formato;
+        public int ID;
+        public string Nombre;
+        public string Artista;
+        public string Album;
+        public string Genero;
+        public double Duracion;
+        public string Calidad;
+        public string Formato;
 
         public Cancion(int a, string b, string c, string d, string e, double f)
         {
