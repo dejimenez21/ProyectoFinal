@@ -28,5 +28,7 @@ namespace ProyectoF
             Calidad = g;
             Formato = h;
         }
+
+
     }   
 }
