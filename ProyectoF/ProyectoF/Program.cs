@@ -235,6 +235,7 @@ namespace ProyectoF
                     case 4:
                         
                         int vElim;
+                        bool vConf=false;
                         Console.WriteLine("Ingrese el ID de la cancion a elminar");
                         vElim = int.Parse(Console.ReadLine());
 
@@ -244,10 +245,18 @@ namespace ProyectoF
                             {
                                 Canciones.RemoveAt(i);
                                 i--;
+                                vConf = true;
                             }
                         }
-                        
-                        Console.WriteLine("Cancion eliminada exitosamente");
+                        if (vConf)
+                        {
+                            Console.WriteLine("Cancion eliminada exitosamente");
+                            vConf = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("No existe ninguna cancion asociada a ese ID");
+                        }
                         Console.ReadKey();
                         break;
 
