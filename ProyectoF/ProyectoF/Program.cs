@@ -266,7 +266,7 @@ namespace ProyectoF
                         Console.WriteLine("\t1- Por Artista");
                         Console.WriteLine("\t2- Por Genero");
                         Console.WriteLine("\t3- Por Nombre");
-                        Console.WriteLine("\t4- Por ID");
+                        
 
                         int des = Int32.Parse(Console.ReadLine());
 
