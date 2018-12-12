@@ -8,9 +8,9 @@ namespace ProyectoF
 {
     class Playlist
     {
-        public string nombre;
-        public string logo;
-        public int ID;
+        public string nombre { get; set; }
+        public string logo { get; set; }
+        public int ID { get; set; }
         List<Cancion> Cancions = new List<Cancion>();
 
         public Playlist(string nm, string lg, int id) {

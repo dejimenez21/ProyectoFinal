@@ -19,3 +19,7 @@ C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\obj\Debug\Proyecto
 C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\obj\Debug\ProyectoF.exe
 C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\obj\Debug\ProyectoF.pdb
 C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\obj\Debug\ProyectoF.csprojAssemblyReference.cache
+C:\Users\Kamehametroll\Desktop\Tarea\Programación 2\ProyectoFinal-master\ProyectoF\ProyectoF\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Kamehametroll\Desktop\Tarea\Programación 2\ProyectoFinal-master\ProyectoF\ProyectoF\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\Kamehametroll\Desktop\Tarea\Programación 2\ProyectoFinal-master\ProyectoF\ProyectoF\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Kamehametroll\Desktop\Tarea\Programación 2\ProyectoFinal-master\ProyectoF\ProyectoF\obj\Debug\ProyectoF.csproj.CopyComplete

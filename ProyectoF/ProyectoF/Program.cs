@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+//Include
+using System.Web.Script.Serialization;
+using System.IO;
+using Newtonsoft.Json;
+using System.Net;
 
 namespace ProyectoF
 {
@@ -11,10 +15,25 @@ namespace ProyectoF
     {
         static void Main(string[] args)
         {
-
+            const string pathContador = "Contador.txt";
+            string[] contador_ID = File.ReadAllLines(pathContador);
             IList<Cancion> Canciones = new List<Cancion>(); // Aqui se almacenan las canciones
             IList<Playlist> Playlist = new List<Playlist>(); //Aqui se almacenan las playlist
-
+            const string pathCanciones = "Canciones.json"; //Aqui pueden cambiar donde se encuentra el archivo-
+            const string pathListas = "Listas.json";       //De normal, ambos archivos se encucentran en la carpeta Bin, por lo que no es necesario usar un path-
+                                                           //Solo escribir el nombre del archivo.
+            string archivoCanciones = File.ReadAllText(pathCanciones);
+            string archivoListas = File.ReadAllText(pathListas);
+            string strCanciones = JsonConvert.SerializeObject(Canciones);
+            string strListas = JsonConvert.SerializeObject(Playlist);
+            if (archivoCanciones!="")
+            {
+                Canciones = JsonConvert.DeserializeObject<List<Cancion>>(archivoCanciones);
+            }
+            if (archivoListas!="")
+            {
+                Playlist = JsonConvert.DeserializeObject<List<Playlist>>(archivoListas);
+            }
             int IdCanciones = 1; //De aqui saldra el ID de las canciones, cada vez que añadamos una cancion le sumaremos +1 a este contador. Modificacion: Al iniciar programa es 1.
             int IdPlaylist = 1;
             int cantCanciones = 0;
@@ -22,7 +41,7 @@ namespace ProyectoF
             bool salirPlaylist = true;
             int count = 0;
 
-
+            #region Menu principal
             while (true)
             {
                 Console.Clear();
@@ -36,27 +55,27 @@ namespace ProyectoF
                 Console.WriteLine("6- Menu Playlist");
                 Console.WriteLine("7- Salir");
                 Console.WriteLine(" ");
-
                 try  //Evita que se inserten cualquier tipo de valor diferente a un numero.
                 {
                     dec = int.Parse(Console.ReadLine());
                 }
                 catch
                 {
-
                 }
-
                 Console.Clear();
-
                 switch (dec)
                 {
                     case 1:
-
+                        if(contador_ID[0] != "")
+                        {
+                            IdCanciones = Convert.ToInt32(contador_ID);
+                        }
 
                         Canciones.Add(AgregarCancion(IdCanciones)); //Se crea un objeto Cancion con sus respectivos parametros
 
                         IdCanciones++;
 
+                        contador_ID[0] = Convert.ToString(IdCanciones);
 
                         break;
 
@@ -103,9 +122,17 @@ namespace ProyectoF
                             switch (decPlaylist)
                             {
                                 case 1:
+                                    if (contador_ID[0] != "")
+                                    {
+                                        if (contador_ID[1] != "")
+                                        {
+                                            IdPlaylist = Convert.ToInt32(contador_ID[1]);
+                                        }
+                                    }
                                     Playlist.Add(AgregarPlaylist(IdPlaylist));
                                     cantCanciones++;
                                     IdPlaylist++;
+                                    contador_ID[1] = Convert.ToString(IdPlaylist);
                                     break;
 
                                 case 2:
@@ -286,12 +313,20 @@ namespace ProyectoF
                         break;
                 }
                 if (salir) break;
+                
             }
+            #endregion
+            strCanciones = JsonConvert.SerializeObject(Canciones);
+            File.WriteAllText(pathCanciones, strCanciones);
+            strListas = JsonConvert.SerializeObject(Playlist);
+            File.WriteAllText(pathListas, strListas);
+            File.WriteAllLines(pathContador, contador_ID);
             Console.WriteLine("Pulse cualquier tecla para salir (incluso la de apagado :v)");
             Console.ReadKey();
 
         }
 
+        #region Funciones
         static Cancion AgregarCancion(int IdCanciones)
         {
 
@@ -620,5 +655,6 @@ namespace ProyectoF
             return playlist;
             
         }
+        #endregion
     }
 }
