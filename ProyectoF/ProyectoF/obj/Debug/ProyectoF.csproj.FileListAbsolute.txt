@@ -23,3 +23,7 @@ C:\Users\Kamehametroll\Desktop\Tarea\Programación 2\ProyectoFinal-master\Proyec
 C:\Users\Kamehametroll\Desktop\Tarea\Programación 2\ProyectoFinal-master\ProyectoF\ProyectoF\bin\Debug\Newtonsoft.Json.pdb
 C:\Users\Kamehametroll\Desktop\Tarea\Programación 2\ProyectoFinal-master\ProyectoF\ProyectoF\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Kamehametroll\Desktop\Tarea\Programación 2\ProyectoFinal-master\ProyectoF\ProyectoF\obj\Debug\ProyectoF.csproj.CopyComplete
+C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\bin\Debug\Newtonsoft.Json.dll
+C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\bin\Debug\Newtonsoft.Json.xml
+C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\obj\Debug\ProyectoF.csproj.CopyComplete

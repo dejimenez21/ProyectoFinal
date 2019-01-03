@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//Include
-using System.Web.Script.Serialization;
-using System.IO;
-using Newtonsoft.Json;
-using System.Net;
+
 
 namespace ProyectoF
 {
@@ -15,75 +11,312 @@ namespace ProyectoF
     {
         static void Main(string[] args)
         {
-            const string pathContador = "Contador.txt";
-            string[] contador_ID = File.ReadAllLines(pathContador);
-            IList<Cancion> Canciones = new List<Cancion>(); // Aqui se almacenan las canciones
-            IList<Playlist> Playlist = new List<Playlist>(); //Aqui se almacenan las playlist
-            const string pathCanciones = "Canciones.json"; //Aqui pueden cambiar donde se encuentra el archivo-
-            const string pathListas = "Listas.json";       //De normal, ambos archivos se encucentran en la carpeta Bin, por lo que no es necesario usar un path-
-                                                           //Solo escribir el nombre del archivo.
-            string archivoCanciones = File.ReadAllText(pathCanciones);
-            string archivoListas = File.ReadAllText(pathListas);
-            string strCanciones = JsonConvert.SerializeObject(Canciones);
-            string strListas = JsonConvert.SerializeObject(Playlist);
-            if (archivoCanciones!="")
-            {
-                Canciones = JsonConvert.DeserializeObject<List<Cancion>>(archivoCanciones);
-            }
-            if (archivoListas!="")
-            {
-                Playlist = JsonConvert.DeserializeObject<List<Playlist>>(archivoListas);
-            }
-            int IdCanciones = 1; //De aqui saldra el ID de las canciones, cada vez que añadamos una cancion le sumaremos +1 a este contador. Modificacion: Al iniciar programa es 1.
-            int IdPlaylist = 1;
-            int cantCanciones = 0;
+            
+            List<Cancion> Canciones = new List<Cancion>();  // Aqui se almacenan las canciones
+            List<Playlist> Playlist = new List<Playlist>(); //Aqui se almacenan las playlist
+
+            int IdCanciones; //De aqui saldra el ID de las canciones, cada vez que añadamos una cancion le sumaremos +1 a este contador. Modificacion: Al iniciar programa es 1.
+            int IdPlaylist;
             bool salir = false;
-            bool salirPlaylist = true;
-            int count = 0;
+            
+            DataManager.RecuperarID(out IdCanciones, out IdPlaylist);
+            DataManager.RecuperarCanciones(out Canciones);
+            DataManager.RecuperarPlaylists(out Playlist);
 
             #region Menu principal
-            while (true)
+            while (!salir)
             {
                 Console.Clear();
-                int dec = 0;
-                int decPlaylist = 0;
-                Console.WriteLine("1- Agregar cancion");
-                Console.WriteLine("2- Listar todas las canciones");
-                Console.WriteLine("3- Editar cancion");
-                Console.WriteLine("4- Borrar cancion");
-                Console.WriteLine("5- Buscar");
-                Console.WriteLine("6- Menu Playlist");
-                Console.WriteLine("7- Salir");
-                Console.WriteLine(" ");
-                try  //Evita que se inserten cualquier tipo de valor diferente a un numero.
-                {
-                    dec = int.Parse(Console.ReadLine());
-                }
-                catch
-                {
-                }
-                Console.Clear();
-                switch (dec)
+                int decMenu = 0;
+                
+                Console.WriteLine("1- Menu Canciones");
+                Console.WriteLine("2- Menu Playlist");
+                Console.WriteLine("3- Crear reporte");
+                Console.WriteLine("4- Salir\n");
+
+                if(!int.TryParse(Console.ReadLine(), out decMenu))
+                    Console.WriteLine("Error: Se ha ingresado un valor no valido");
+
+                switch (decMenu)
                 {
                     case 1:
-                        if(contador_ID[0] != "")
-                        {
-                            IdCanciones = Convert.ToInt32(contador_ID);
-                        }
 
-                        Canciones.Add(AgregarCancion(IdCanciones)); //Se crea un objeto Cancion con sus respectivos parametros
-
-                        IdCanciones++;
-
-                        contador_ID[0] = Convert.ToString(IdCanciones);
+                        MenuCanciones(Canciones, ref IdCanciones);
 
                         break;
 
                     case 2:
 
+                        MenuListas(Playlist, ref IdPlaylist, Canciones);
+                        break;
+
+                    case 3:
+
+                        break;
+
+                    case 4:
+                        salir = true;
+                        break;
+
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("Ingrese una opcion valida\n");
+                        break;
+                }
+                
+            }
+            #endregion
+
+            DataManager.Grabar(Canciones, Playlist, IdCanciones, IdPlaylist);
+
+            Console.WriteLine("Pulse cualquier tecla para salir (incluso la de apagado :v)");
+            Console.ReadKey();
+
+        }
+
+        private static List<Playlist> MenuListas(List<Playlist> Playlist, ref int IdPlaylist, List<Cancion> Canciones)
+        {
+            int decPlaylist = 0;
+            bool salirPlaylist = false;
+            int cantCanciones = 0;
+            int count = 0;
+
+            while (!salirPlaylist)
+            {
+                Console.Clear();
+                Console.WriteLine("1- Agregar lista de canciones");
+                Console.WriteLine("2- Listar todas las listas de canciones");
+                Console.WriteLine("3- Editar playlist");
+                Console.WriteLine("4- Borrar playlist");
+                Console.WriteLine("5- Buscar cancion en playlist");
+                Console.WriteLine("6- Salir");
+
+                Console.WriteLine(" ");
+
+                decPlaylist = Int32.Parse(Console.ReadLine());
+
+                switch (decPlaylist)
+                {
+                    case 1:
+
+                        Playlist.Add(AgregarPlaylist(IdPlaylist));
+                        cantCanciones++;
+                        IdPlaylist++;
+                        break;
+
+                    case 2:
+
+                        Console.Clear();
+                        foreach (Playlist p in Playlist)
+                        {
+                            Console.WriteLine("ID: " + p.ID);
+                            Console.WriteLine("Nombre: " + p.nombre);
+                            Console.WriteLine("Logo: " + p.logo);
+                            p.CantidadCanciones();
+                            Console.WriteLine(" ");
+                            Console.WriteLine(" ");
+                        }
+                        Console.ReadLine();
+                        break;
+                    case 3:
+                        int des = 0;
+                        Console.Clear();
+                        Console.WriteLine("Introduzca el ID de la lista a editar");
+                        int IDedit = Int32.Parse(Console.ReadLine());
+
+                        foreach (Playlist o in Playlist)
+                        {
+                            if (o.ID == IDedit)
+                            {
+                                Console.Clear();
+                                bool force = true;
+                                Console.WriteLine("1- Editar nombre");
+                                Console.WriteLine("2- Editar logo");
+                                Console.WriteLine("3- Agregar cancion");
+                                Console.WriteLine("4- Listar canciones");
+                                Console.WriteLine("5- Borrar cancione");
+                                Console.WriteLine("6- Atras");
+                                des = Int32.Parse(Console.ReadLine());
+                                switch (des)
+                                {
+                                    case 1:
+                                        string vNom;
+                                        Console.WriteLine("Ingrese el nuevo nombre");
+                                        vNom = Console.ReadLine();
+                                        foreach (Playlist p in Playlist)
+                                        {
+                                            if (p.ID == IDedit)
+                                            {
+                                                p.nombre = vNom;
+                                            }
+                                        }
+                                        break;
+                                    case 2:
+                                        string vLogo;
+                                        Console.WriteLine("Ingrese el nuevo logo");
+                                        vLogo = Console.ReadLine();
+                                        foreach (Playlist p in Playlist)
+                                        {
+                                            if (p.ID == IDedit)
+                                            {
+                                                p.logo = vLogo;
+                                            }
+                                        }
+                                        break;
+                                    case 3:
+
+                                        string vNombreC;
+                                        Console.WriteLine("Ingrese el nombre de la cancion a agregar:");
+                                        vNombreC = Console.ReadLine();
+                                        foreach (Playlist p in Playlist)
+                                        {
+                                            if (p.ID == IDedit)
+                                            {
+                                                foreach (Cancion c in Canciones)
+                                                {
+                                                    if (c.Nombre == vNombreC)
+                                                    {
+                                                        count++;
+                                                        p.AgregarCancion(c);
+                                                    }
+                                                }
+                                            }
+
+                                        }
+                                        if (count <= 0)
+                                        {
+                                            Console.WriteLine("Esa cancion no existe");
+                                        }
+                                        Console.ReadLine();
+                                        break;
+                                    case 4:
+                                        foreach (Playlist p in Playlist)
+                                        {
+                                            if (p.ID == IDedit)
+                                            {
+                                                p.ImprimirCanciones();
+                                            }
+                                        }
+                                        Console.ReadLine();
+                                        break;
+                                    case 5:
+                                        Console.WriteLine("Que cancion desea remover?");
+                                        string canRemover;
+                                        canRemover = Console.ReadLine();
+                                        foreach (Playlist p in Playlist)
+                                        {
+                                            if (p.ID == IDedit)
+                                            {
+                                                foreach (Cancion c in Canciones)
+                                                {
+                                                    if (canRemover == c.Nombre)
+                                                    {
+                                                        p.RemoverCancion(c);
+                                                        count--;
+                                                        Console.WriteLine("Cancion removida exitosamente");
+                                                        Console.ReadLine();
+                                                        force = false;
+                                                    }
+                                                }
+                                            }
+
+                                        }
+                                        if (force)
+                                        {
+                                            Console.WriteLine("No se encontro la cancion que desea remover");
+                                        }
+                                        break;
+                                    case 6:
+                                        break;
+                                    default:
+                                        Console.WriteLine("Esa no es una opcion");
+                                        break;
+
+                                }
+
+                                break;
+                            }
+                        }
+                        break;
+                    case 4:
+                        int playremove;
+                        bool force1 = false;
+                        Console.WriteLine("Ingrese el ID de la Playlist que desea borrar");
+                        playremove = Int32.Parse(Console.ReadLine());
+                        for (int i = 0; i < Playlist.Count; i++)
+                        {
+                            if (Playlist[i].ID == playremove)
+                            {
+                                Playlist.RemoveAt(i);
+                                Console.WriteLine("Playlist eliminada correctamente");
+                                force1 = false;
+                            }
+                        }
+                        if (force1)
+                        {
+                            Console.WriteLine("No se encontro la Playlist que desea eliminiar");
+                        }
+                        break;
+                    case 5:
+                        int idFound = 0;
+                        string fSong;
+                        Console.WriteLine("Ingrese el ID de la Playlist en la cual quiere buscar");
+                        idFound = Int32.Parse(Console.ReadLine());
+                        foreach (Playlist p in Playlist)
+                        {
+                            if (p.ID == idFound)
+                            {
+                                Console.WriteLine("Ingrese el nombre de la cancion a borrar");
+                                fSong = Console.ReadLine();
+                                p.PrintSpecific(fSong);
+                            }
+                        }
+                        Console.ReadLine();
+                        break;
+                    case 6:
+                        salirPlaylist = true;
+                        break;
+                }
+
+
+            }
+
+            return Playlist; 
+        }
+
+        private static List<Cancion> MenuCanciones(List<Cancion> Canciones, ref int IdCanciones)
+        {
+            
+            int decCanciones = 0;
+            bool salirCanciones = false;
+
+            while (!salirCanciones)
+            {
+
+                Console.WriteLine("1- Agregar cancion");
+                Console.WriteLine("2- Listar todas las canciones");
+                Console.WriteLine("3- Editar cancion");
+                Console.WriteLine("4- Borrar cancion");
+                Console.WriteLine("5- Buscar");
+                Console.WriteLine("6- Atras");
+                Console.WriteLine(" ");
+
+                if (!int.TryParse(Console.ReadLine(), out decCanciones))
+                    Console.WriteLine("Error: Inserte una opcion valida");
+
+                Console.Clear();
+                switch (decCanciones)
+                {
+                    case 1:
+
+                        Canciones.Add(AgregarCancion(IdCanciones)); //Se crea un objeto Cancion con sus respectivos parametros
+                        IdCanciones++;
+
+                        break;
+
+                    case 2:
 
                         ListarCanciones(Canciones);
-
 
                         break;
 
@@ -106,205 +339,9 @@ namespace ProyectoF
                         break;
 
                     case 6:
-                        while (salirPlaylist) {
-                            Console.Clear();
-                            Console.WriteLine("1- Agregar lista de canciones");
-                            Console.WriteLine("2- Listar todas las listas de canciones");
-                            Console.WriteLine("3- Editar playlist");
-                            Console.WriteLine("4- Borrar playlist");
-                            Console.WriteLine("5- Buscar cancion en playlist");
-                            Console.WriteLine("6- Salir");
 
-                            Console.WriteLine(" ");
+                        salirCanciones = true;
 
-                            decPlaylist = Int32.Parse(Console.ReadLine());
-
-                            switch (decPlaylist)
-                            {
-                                case 1:
-                                    if (contador_ID[0] != "")
-                                    {
-                                        if (contador_ID[1] != "")
-                                        {
-                                            IdPlaylist = Convert.ToInt32(contador_ID[1]);
-                                        }
-                                    }
-                                    Playlist.Add(AgregarPlaylist(IdPlaylist));
-                                    cantCanciones++;
-                                    IdPlaylist++;
-                                    contador_ID[1] = Convert.ToString(IdPlaylist);
-                                    break;
-
-                                case 2:
-
-                                    Console.Clear();
-                                    foreach (Playlist p in Playlist)
-                                    {
-                                        Console.WriteLine("ID: " + p.ID);
-                                        Console.WriteLine("Nombre: " + p.nombre);
-                                        Console.WriteLine("Logo: " + p.logo);
-                                        p.CantidadCanciones();
-                                        Console.WriteLine(" ");
-                                        Console.WriteLine(" ");
-                                    }
-                                    Console.ReadLine();
-                                    break;
-                                case 3:
-                                    int des = 0;
-                                    Console.Clear();
-                                    Console.WriteLine("Introduzca el ID de la lista a editar");
-                                    int IDedit = Int32.Parse(Console.ReadLine());
-                                   
-                                    foreach (Playlist o in Playlist) {
-                                        if(o.ID == IDedit)
-                                        {
-                                            Console.Clear();
-                                            bool force = true;
-                                            Console.WriteLine("1- Editar nombre");
-                                            Console.WriteLine("2- Editar logo");
-                                            Console.WriteLine("3- Agregar cancion");
-                                            Console.WriteLine("4- Listar canciones");
-                                            Console.WriteLine("5- Borrar cancione");
-                                            Console.WriteLine("6- Atras");
-                                            des = Int32.Parse(Console.ReadLine());
-                                            switch (des)
-                                            {
-                                                case 1:
-                                                    string vNom;
-                                                    Console.WriteLine("Ingrese el nuevo nombre");
-                                                    vNom = Console.ReadLine();
-                                                    foreach (Playlist p in Playlist)
-                                                    {
-                                                        if (p.ID == IDedit)
-                                                        {
-                                                            p.nombre = vNom;
-                                                        }
-                                                    }
-                                                    break;
-                                                case 2:
-                                                    string vLogo;
-                                                    Console.WriteLine("Ingrese el nuevo logo");
-                                                    vLogo = Console.ReadLine();
-                                                    foreach (Playlist p in Playlist)
-                                                    {
-                                                        if (p.ID == IDedit)
-                                                        {
-                                                            p.logo = vLogo;
-                                                        }
-                                                    }
-                                                    break;
-                                                case 3:
-                                                    
-                                                    string vNombreC;
-                                                    Console.WriteLine("Ingrese el nombre de la cancion a agregar:");
-                                                    vNombreC = Console.ReadLine();
-                                                    foreach (Playlist p in Playlist)
-                                                    {
-                                                        if (p.ID == IDedit) {
-                                                            foreach (Cancion c in Canciones)
-                                                            {
-                                                                if (c.Nombre == vNombreC)
-                                                                {
-                                                                    count++;
-                                                                    p.AgregarCancion(c);
-                                                                }
-                                                            }
-                                                        }
-                                                        
-                                                    }
-                                                    if (count <= 0) {
-                                                        Console.WriteLine("Esa cancion no existe");
-                                                    }
-                                                    Console.ReadLine();
-                                                    break;
-                                                case 4:
-                                                    foreach (Playlist p in Playlist)
-                                                    {
-                                                        if (p.ID == IDedit)
-                                                        {
-                                                            p.ImprimirCanciones();
-                                                        }
-                                                    }
-                                                    Console.ReadLine();
-                                                    break;
-                                                case 5:
-                                                    Console.WriteLine("Que cancion desea remover?");
-                                                    string canRemover;
-                                                    canRemover = Console.ReadLine();
-                                                    foreach (Playlist p in Playlist)
-                                                    {
-                                                        if (p.ID == IDedit) {
-                                                            foreach (Cancion c in Canciones)
-                                                            {
-                                                                if (canRemover == c.Nombre) {
-                                                                    p.RemoverCancion(c);
-                                                                    count--;
-                                                                    Console.WriteLine("Cancion removida exitosamente");
-                                                                    Console.ReadLine();
-                                                                    force = false;
-                                                                }
-                                                            }
-                                                        }
-                                                        
-                                                    }
-                                                    if (force) {
-                                                        Console.WriteLine("No se encontro la cancion que desea remover");
-                                                    }
-                                                    break;
-                                                case 6:
-                                                    break;
-                                                default:
-                                                    Console.WriteLine("Esa no es una opcion");
-                                                    break;
-                                                
-                                            }
-
-                                            break;
-                                        }
-                                    }
-                                    break;
-                                case 4:
-                                    int playremove;
-                                    bool force1 = false;
-                                    Console.WriteLine("Ingrese el ID de la Playlist que desea borrar");
-                                    playremove = Int32.Parse(Console.ReadLine());
-                                    for (int i = 0; i < Playlist.Count; i++) {
-                                        if (Playlist[i].ID == playremove) {
-                                            Playlist.RemoveAt(i);
-                                            Console.WriteLine("Playlist eliminada correctamente");
-                                            force1 = false;
-                                        }
-                                    }
-                                    if (force1) {
-                                        Console.WriteLine("No se encontro la Playlist que desea eliminiar");
-                                    }
-                                    break;
-                                case 5:
-                                    int idFound = 0;
-                                    string fSong;
-                                    Console.WriteLine("Ingrese el ID de la Playlist en la cual quiere buscar");
-                                    idFound = Int32.Parse(Console.ReadLine());
-                                    foreach (Playlist p in Playlist)
-                                    {
-                                        if (p.ID == idFound) {
-                                            Console.WriteLine("Ingrese el nombre de la cancion a borrar");
-                                            fSong = Console.ReadLine();
-                                            p.PrintSpecific(fSong);
-                                        }
-                                    }
-                                    Console.ReadLine();
-                                    break;
-                                case 6:
-                                    salirPlaylist = false;
-                                    break;
-                            }
-
-                        }
-                        
-                        break;
-
-                    case 7:
-                        salir = true;
                         break;
 
                     default:
@@ -312,19 +349,12 @@ namespace ProyectoF
                         Console.ReadKey();
                         break;
                 }
-                if (salir) break;
-                
             }
-            #endregion
-            strCanciones = JsonConvert.SerializeObject(Canciones);
-            File.WriteAllText(pathCanciones, strCanciones);
-            strListas = JsonConvert.SerializeObject(Playlist);
-            File.WriteAllText(pathListas, strListas);
-            File.WriteAllLines(pathContador, contador_ID);
-            Console.WriteLine("Pulse cualquier tecla para salir (incluso la de apagado :v)");
-            Console.ReadKey();
 
+            return Canciones;
         }
+
+
 
         #region Funciones
         static Cancion AgregarCancion(int IdCanciones)
@@ -374,7 +404,7 @@ namespace ProyectoF
             return cancion;
         }
 
-        static void ListarCanciones(IList<Cancion> Canciones)
+        static void ListarCanciones(List<Cancion> Canciones)
         {
             foreach (Cancion k in Canciones) //Se imprimen las canciones
             {
@@ -391,7 +421,7 @@ namespace ProyectoF
             Console.ReadKey();
         }
 
-        static void EditarCanciones(IList<Cancion> Canciones)
+        static void EditarCanciones(List<Cancion> Canciones)
         {
             int id, dec1 = 0;
 
@@ -518,7 +548,7 @@ namespace ProyectoF
             }
         }
 
-        static void EliminarCanciones(IList<Cancion> Canciones)
+        static void EliminarCanciones(List<Cancion> Canciones)
         {
             int vElim;
             bool vConf = false;
@@ -546,7 +576,7 @@ namespace ProyectoF
             Console.ReadKey();
         }
 
-        static void BuscarCanciones(IList<Cancion> Canciones)
+        static void BuscarCanciones(List<Cancion> Canciones)
         {
             int found = 0;
             Console.WriteLine("Buscar:\n");
