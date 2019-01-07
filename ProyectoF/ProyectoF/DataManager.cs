@@ -5,13 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
-using System.Net;
-using System.Web.Script.Serialization;
+using OfficeOpenXml;
+
+
 
 namespace ProyectoF
 {
     static class DataManager
     {
+        const string pathExcel = "ReporteExcel.xlsx";
         const string pathContador = "ID.dat";
         const string pathCanciones = "Canciones.json";   //Aqui pueden cambiar donde se encuentra el archivo-
         const string pathListas = "Listas.json";         //De normal, ambos archivos se encucentran en la carpeta Bin, por lo que no es necesario usar un path-
@@ -74,7 +76,16 @@ namespace ProyectoF
             
         }
 
-        
+        public static void ReporteExcel()
+        {
+            File.Delete(pathExcel);
+            FileInfo spreadsheetInfo = new FileInfo(pathExcel);
+
+            ExcelPackage pck = new ExcelPackage(spreadsheetInfo);
+            var ExcelWorkSheet = pck.Workbook.Worksheets.Add("Listas de Reproduccion");
+
+            
+        }
 
        
     }

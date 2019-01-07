@@ -35,7 +35,9 @@ namespace ProyectoF
                 Console.WriteLine("4- Salir\n");
 
                 if(!int.TryParse(Console.ReadLine(), out decMenu))
-                    Console.WriteLine("Error: Se ha ingresado un valor no valido");
+                    ErrorManager.ValorInvalido();
+
+               
 
                 switch (decMenu)
                 {
@@ -52,6 +54,7 @@ namespace ProyectoF
 
                     case 3:
 
+                        MenuReporte();
                         break;
 
                     case 4:
@@ -72,6 +75,45 @@ namespace ProyectoF
             Console.WriteLine("Pulse cualquier tecla para salir (incluso la de apagado :v)");
             Console.ReadKey();
 
+        }
+
+        private static void MenuReporte()
+        {
+            int decReporte=0;
+            bool salirReporte=false;
+
+            
+
+            while (!salirReporte)
+            {
+                Console.WriteLine("1- PDF");
+                Console.WriteLine("2- CSV");
+                Console.WriteLine("3- Excel");
+                Console.WriteLine("4- Atras\n");
+
+                if (int.TryParse(Console.ReadLine(), out decReporte))
+                    ErrorManager.ValorInvalido();
+
+                switch (decReporte)
+                {
+                    case 1:
+                        break;
+
+                    case 2:
+                        break;
+
+                    case 3:
+                        break;
+
+                    case 4:
+                        salirReporte = true;
+                        break;
+
+                    default:
+                        ErrorManager.ValorInvalido();
+                        break;
+                }
+            }
         }
 
         private static List<Playlist> MenuListas(List<Playlist> Playlist, ref int IdPlaylist, List<Cancion> Canciones)
@@ -302,7 +344,7 @@ namespace ProyectoF
                 Console.WriteLine(" ");
 
                 if (!int.TryParse(Console.ReadLine(), out decCanciones))
-                    Console.WriteLine("Error: Inserte una opcion valida");
+                    ErrorManager.ValorInvalido();
 
                 Console.Clear();
                 switch (decCanciones)
