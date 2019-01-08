@@ -31,8 +31,9 @@ namespace ProyectoF
                 
                 Console.WriteLine("1- Menu Canciones");
                 Console.WriteLine("2- Menu Playlist");
-                Console.WriteLine("3- Crear reporte");
-                Console.WriteLine("4- Salir\n");
+                Console.WriteLine("3- Generar reporte");
+                Console.WriteLine("4- Exportar e Importar");
+                Console.WriteLine("5- Salir\n");
 
                 if(!int.TryParse(Console.ReadLine(), out decMenu))
                     ErrorManager.ValorInvalido();
@@ -54,10 +55,14 @@ namespace ProyectoF
 
                     case 3:
 
-                        MenuReporte();
+                        MenuReporte(Playlist);
                         break;
 
+
                     case 4:
+
+                        break;
+                    case 5:
                         salir = true;
                         break;
 
@@ -77,7 +82,7 @@ namespace ProyectoF
 
         }
 
-        private static void MenuReporte()
+        private static void MenuReporte(List<Playlist> listas)
         {
             int decReporte=0;
             bool salirReporte=false;
@@ -91,18 +96,27 @@ namespace ProyectoF
                 Console.WriteLine("3- Excel");
                 Console.WriteLine("4- Atras\n");
 
-                if (int.TryParse(Console.ReadLine(), out decReporte))
+                if (!int.TryParse(Console.ReadLine(), out decReporte))
                     ErrorManager.ValorInvalido();
 
                 switch (decReporte)
                 {
                     case 1:
+                        DataManager.ReportePDF(listas);
+                        Console.WriteLine("Reporte generado exitosamente");
+                        Console.ReadKey();
                         break;
 
                     case 2:
+                        DataManager.ReporteCSV(listas);
+                        Console.WriteLine("Reporte generado exitosamente");
+                        Console.ReadKey();
                         break;
 
                     case 3:
+                        DataManager.ReporteExcel(listas, true);
+                        Console.WriteLine("Reporte generado exitosamente");
+                        Console.ReadKey();
                         break;
 
                     case 4:

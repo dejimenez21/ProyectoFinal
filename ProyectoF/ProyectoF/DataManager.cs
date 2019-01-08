@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
 using OfficeOpenXml;
-
-
+using GemBox.Spreadsheet;
+using Spire.Xls;
+using System.Globalization;
 
 namespace ProyectoF
 {
     static class DataManager
     {
+        const string pathCSV = "ReporteCSV.csv";
+        const string pathPDF = "ReportePDF.pdf";
         const string pathExcel = "ReporteExcel.xlsx";
         const string pathContador = "ID.dat";
         const string pathCanciones = "Canciones.json";   //Aqui pueden cambiar donde se encuentra el archivo-
@@ -76,17 +79,83 @@ namespace ProyectoF
             
         }
 
-        public static void ReporteExcel()
+        public static void ReporteExcel(List<Playlist> listas, bool exist)
         {
+            int fila = 1;
+
             File.Delete(pathExcel);
             FileInfo spreadsheetInfo = new FileInfo(pathExcel);
 
             ExcelPackage pck = new ExcelPackage(spreadsheetInfo);
             var ExcelWorkSheet = pck.Workbook.Worksheets.Add("Listas de Reproduccion");
 
-            
+            foreach (var lista in listas)
+            {
+                ExcelWorkSheet.Cells["A" + fila.ToString()].Value = lista.nombre;
+                fila++;
+                
+                foreach(var cancion in lista.Cancions)
+                {
+                    ExcelWorkSheet.Cells["A" + fila.ToString()].Value = cancion.Nombre;
+                    ExcelWorkSheet.Cells["B" + fila.ToString()].Value = cancion.Artista;
+                    ExcelWorkSheet.Cells["C" + fila.ToString()].Value = cancion.Genero;
+                    ExcelWorkSheet.Cells["D" + fila.ToString()].Value = cancion.Album;
+                    ExcelWorkSheet.Cells["E" + fila.ToString()].Value = cancion.Duracion.ToString();
+                    ExcelWorkSheet.Cells["F" + fila.ToString()].Value = cancion.Calidad;
+                    ExcelWorkSheet.Cells["G" + fila.ToString()].Value = cancion.Formato;
+                    fila++;
+                    
+                }
+
+                ExcelWorkSheet.Cells["A" + fila.ToString()].Value ="Total de Canciones: " + lista.Cancions.Count.ToString();
+                fila += 2;
+            }
+
+            pck.Save();
+
+            if (!exist)
+            {
+                File.SetAttributes(pathExcel, FileAttributes.Hidden);
+            }
         }
 
-       
+        public static void ReportePDF(List<Playlist> listas)
+        {
+            ReporteExcel(listas, File.Exists(pathExcel) && (File.GetAttributes(pathExcel) & FileAttributes.Archive) == FileAttributes.Archive);
+            SpreadsheetInfo.SetLicense("FREE-LIMITED-KEY");
+            XlsxLoadOptions loadOptions = new XlsxLoadOptions();
+            ExcelFile excel = ExcelFile.Load(pathExcel, loadOptions);
+
+            PdfSaveOptions saveOptions = new PdfSaveOptions();
+            excel.Save(pathPDF, saveOptions);
+        }
+
+        public static void ReporteCSV(List<Playlist> listas)
+        {
+            ReporteExcel(listas, File.Exists(pathExcel) && (File.GetAttributes(pathExcel) & FileAttributes.Archive) == FileAttributes.Archive);
+
+            //Workbook workbook = new Workbook();
+
+            //workbook.LoadFromFile(pathExcel);
+
+            //Worksheet sheet = workbook.Worksheets[0];
+
+            //sheet.SaveToFile("ReporteCSV.csv", " ", Encoding.UTF8);
+
+            SpreadsheetInfo.SetLicense("FREE-LIMITED-KEY");
+            XlsxLoadOptions loadOptions = new XlsxLoadOptions();
+            ExcelFile excel = ExcelFile.Load(pathExcel, loadOptions);
+
+
+            excel.Save(
+                pathCSV,
+                new CsvSaveOptions(CsvType.SemicolonDelimited)
+                {
+                    FormatProvider = CultureInfo.CurrentCulture
+                });
+
+        }
+
+
     }
 }

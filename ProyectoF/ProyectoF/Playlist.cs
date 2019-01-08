@@ -11,12 +11,13 @@ namespace ProyectoF
         public string nombre { get; set; }
         public string logo { get; set; }
         public int ID { get; set; }
-        List<Cancion> Cancions = new List<Cancion>();
+        public List<Cancion> Cancions = new List<Cancion>();
 
         public Playlist(string nm, string lg, int id) {
             nombre = nm;
             logo = lg;
             ID = id;
+
         }
 
         public void AgregarCancion(Cancion cancion) {

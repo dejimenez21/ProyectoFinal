@@ -27,3 +27,15 @@ C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\bin\Debug\Newtonso
 C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\bin\Debug\Newtonsoft.Json.pdb
 C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\bin\Debug\Newtonsoft.Json.xml
 C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\obj\Debug\ProyectoF.csproj.CopyComplete
+C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\bin\Debug\EPPlus.dll
+C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\bin\Debug\EPPlus.xml
+C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\bin\Debug\GemBox.Spreadsheet.dll
+C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\bin\Debug\GemBox.Spreadsheet.xml
+C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\bin\Debug\Spire.Common.dll
+C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\bin\Debug\Spire.License.dll
+C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\bin\Debug\Spire.Pdf.dll
+C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\bin\Debug\Spire.XLS.dll
+C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\bin\Debug\Microsoft.mshtml.dll
+C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\bin\Debug\Spire.Common.xml
+C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\bin\Debug\Spire.Pdf.xml
+C:\Users\dejim\Source\Repos\ProyectoFinal\ProyectoF\ProyectoF\bin\Debug\Spire.XLS.xml
